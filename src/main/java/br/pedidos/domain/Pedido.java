@@ -41,4 +41,14 @@ public class Pedido implements Identificacao{
 		return descricao;
 	}
 
+	public void setItems(List<Item> items) {
+		this.items = items;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+	
+	
+
 }

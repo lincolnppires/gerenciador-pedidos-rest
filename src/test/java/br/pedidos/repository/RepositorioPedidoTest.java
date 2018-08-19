@@ -31,7 +31,7 @@ public class RepositorioPedidoTest {
 	
 	@Test
 	public void testaRepositorioVazioEBuscaPorIdInvalidoRetornaFalsoNoRepositorioVazio() {
-		assertNaoPossuiPedidos();
+		assertEquals(0, repositorio.getQuantidade());
 		Optional<Pedido> pedido = repositorio.buscaPorId(idInexistente);
 		assertFalse(pedido.isPresent());
 	}
@@ -49,8 +49,8 @@ public class RepositorioPedidoTest {
 		Pedido pedido = repositorio.insere(new Pedido("pedido1"));
 		repositorio.insere(new Pedido("pedido2"));
 		
-		assertTrue(True, repositorio.delete(pedido.getId()));
-		assertEquals(1, repositorio.getQuantidade);		
+		assertTrue(repositorio.delete(pedido.getId()));
+		assertEquals(1, repositorio.getQuantidade());		
 	}
 	
 	@Test
