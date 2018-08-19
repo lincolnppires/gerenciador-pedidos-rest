@@ -1,7 +1,10 @@
 package br.pedidos.repository;
 
+import org.springframework.stereotype.Repository;
+
 import br.pedidos.domain.Pedido;
 
+@Repository
 public class RepositorioPedido extends RepositorioEmMemoria<Pedido> {
 
 	@Override

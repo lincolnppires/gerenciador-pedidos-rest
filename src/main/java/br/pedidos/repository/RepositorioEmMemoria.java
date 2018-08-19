@@ -31,10 +31,11 @@ public abstract class RepositorioEmMemoria<T extends Identificacao> {
 		if (elemento == null)
 			return false;
 		else {
-			Optional<T> objeto = buscaPorId(elemento.getId());
+			Optional<T> objeto = buscaPorId(id);
 			objeto.ifPresent(original -> atualizaSeExistir(original, elemento));
 			return objeto.isPresent();
 		}
+		
 	}
 	
 	protected abstract void atualizaSeExistir(T original, T novo);

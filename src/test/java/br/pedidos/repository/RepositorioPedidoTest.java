@@ -45,7 +45,7 @@ public class RepositorioPedidoTest {
 	}
 	
 	@Test
-	private void testaRemocaoDeUmPedidoPorId() {
+	public void testaRemocaoDeUmPedidoPorId() {
 		Pedido pedido = repositorio.insere(new Pedido("pedido1"));
 		repositorio.insere(new Pedido("pedido2"));
 		
@@ -54,7 +54,7 @@ public class RepositorioPedidoTest {
 	}
 	
 	@Test
-	private void testaAtualizacaoDeUmPedido() {
+	public void testaAtualizacaoDeUmPedido() {
 		Pedido pedido1 = repositorio.insere(new Pedido("pedido1"));
 		repositorio.insere(new Pedido("pedido2"));
 		Pedido novo = new Pedido("pedido alterado");
