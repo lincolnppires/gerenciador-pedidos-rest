@@ -4,14 +4,14 @@ public class Item {
 
 	private int id;
 	private String nome;
-	private int valor;
+	private Long valor;
 	
-	public Item(String nome, int valor) {
+	public Item(String nome, Long valor) {
 		this.nome = nome;
 		this.valor = valor;
 	}
 	
-	public int getValor() {
+	public Long getValor() {
 		return valor;
 	}
 		
