@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
-public class Pedido {
+public class Pedido implements Identificacao{
 	
 	private long id;
 	private List<Item> items = new ArrayList();
@@ -19,12 +19,18 @@ public class Pedido {
 		items.add(item);
 	}
 	
-	public long getId() {
-		return id;
-	}
-	
 	public List<Item> getItems() {
 		return items;
+	}
+
+	@Override
+	public Long getId() {
+		return id;
+	}
+
+	@Override
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 }
