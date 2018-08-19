@@ -1,12 +1,11 @@
 package br.pedidos.domain;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import static junit.framework.Assert.assertTrue;
-import junit.framework.Assert;
 
 public class PedidoTest {
 
@@ -18,16 +17,16 @@ public class PedidoTest {
 	}
 	
 	private void assertNaoPossuiItens() {
-		assetTrue(pedido.getItem.isEmpty());
+		assertTrue(pedido.getItems().isEmpty());
 	}
 
 	private void assertTotalDoCusto(long total) {
-		assertEquals(total, pedido.getTotalCusto);	
+		assertEquals(total, pedido.getTotalCusto());	
 	}
 
 	private Item adicionarItemComCusto(int valor) {
-		Item item = new Item(valor);
-		pedido.adicionaItem(item);
+		Item item = new Item("item1", valor);
+		pedido.adicionaItem(item);	
 		return item;
 	}
 	
@@ -40,13 +39,13 @@ public class PedidoTest {
 	@Test
 	public void testaPedidoCom1ItemCustoDeveSerValorDoItem() {
 		Item item = adicionarItemComCusto(100);
-		assertTotalDoCusto(item.getValor);
+		assertTotalDoCusto(item.getValor());
 	}
 
 	@Test
 	public void testaPedidoCom2ItensCustoDeveSerASomaDosValoresDeCadaItem() {
 		Item item1 = adicionarItemComCusto(100);
 		Item item2 = adicionarItemComCusto(200);
-		assertTotalDoCusto(item1.getValor + item2.getValor);
+		assertTotalDoCusto(item1.getValor() + item2.getValor());
 	}
 }
