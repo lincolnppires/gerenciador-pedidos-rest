@@ -17,7 +17,7 @@ public class PedidoTest {
 	
 	@Before
 	public void setUp() {
-		this.pedido = new Pedido();
+		this.pedido = new Pedido("temp");
 	}
 	
 	private void assertNaoPossuiItens() {
