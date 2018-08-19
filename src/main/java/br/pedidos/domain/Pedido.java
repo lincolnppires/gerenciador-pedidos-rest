@@ -9,8 +9,12 @@ public class Pedido implements Identificacao{
 	
 	private long id;
 	private List<Item> items = new ArrayList();
+	private String descricao;
 	
-	
+	public Pedido(String descricao) {
+		this.descricao = descricao;
+	}
+
 	public long getTotalCusto() {
 		return items.stream().collect(Collectors.summingLong(item -> item.getValor()));
 	}
@@ -31,6 +35,10 @@ public class Pedido implements Identificacao{
 	@Override
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getDescricao() {
+		return descricao;
 	}
 
 }
