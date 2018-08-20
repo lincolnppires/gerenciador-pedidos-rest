@@ -94,21 +94,22 @@ public class PedidoControllerTest extends ControllerTest {
 		deletePedido(deletaPedido.getId());
 		assertNenhumPedido();
 	}
-//
-//	@Test
-//	public void testaPUTPedidoExistenteGaranteAtualizacao() throws Exception {
-//		inserePedido(1);
-//		assertQuantidadeDePedidosE(1);
-//
-//		Pedido novo = new Pedido("Descricao Atualizada");
-//		novo.setId(1l);
-//
-//		putPedido(novo.getId(), novo);
-//
-//		Optional<Pedido> retornoPedido = repositorio.buscaPorId(novo.getId());
-//		assertEquals(retornoPedido.get().getDescricao(), "Descricao Atualizada");
-//
-//	}
+
+	@Test
+	public void testaPUTPedidoExistenteGaranteAtualizacao() throws Exception {
+		inserePedido(3);
+		assertQuantidadeDePedidosE(3);
+		Optional<Pedido> buscaAtualizado = repositorio.buscaTodos().stream().findFirst();
+		
+		Pedido novo = new Pedido("Descricao Atualizada");
+		novo.setId(buscaAtualizado.get().getId());
+
+		putPedido(novo.getId(), novo);
+
+		Optional<Pedido> retornoPedido = repositorio.buscaPorId(novo.getId());
+		assertEquals(retornoPedido.get().getDescricao(), "Descricao Atualizada");
+
+	}
 
 	private ResultActions getPedido() throws Exception {
 		return get("/pedido");

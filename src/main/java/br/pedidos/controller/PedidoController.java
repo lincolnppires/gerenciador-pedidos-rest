@@ -64,6 +64,16 @@ public class PedidoController {
 		return new ResponseEntity<>(responseStatus);
 	}
 	
+	@RequestMapping(value="{id}", method=RequestMethod.PUT, consumes="application/json")
+	public ResponseEntity<PedidoRecurso> atualizaPedido(@PathVariable Long id, @RequestBody Pedido atualizaPedido){
+		boolean foiAtualizado = repositorio.update(id, atualizaPedido);
+		
+		if(foiAtualizado)
+			return getPedidoPorId(id);
+		else
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
+	
 	
 	
 	
