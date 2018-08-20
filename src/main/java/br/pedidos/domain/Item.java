@@ -6,6 +6,9 @@ public class Item {
 	private String nome;
 	private Long valor;
 	
+	public Item() {
+	}
+	
 	public Item(String nome, Long valor) {
 		this.nome = nome;
 		this.valor = valor;

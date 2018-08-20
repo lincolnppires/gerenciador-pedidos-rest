@@ -45,7 +45,7 @@ public class ControllerTest {
 			);
 	}
 
-	public String toJsonString(final Object content) throws JsonProcessingException {
+	protected static String toJsonString(final Object content) throws JsonProcessingException {
 		ObjectMapper mapper = new ObjectMapper();
 		return mapper.writeValueAsString(content);
 	}

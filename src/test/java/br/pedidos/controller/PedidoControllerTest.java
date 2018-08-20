@@ -6,6 +6,7 @@ import static org.junit.Assert.assertEquals;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 import org.junit.Before;
@@ -18,6 +19,7 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
+import br.pedidos.domain.Item;
 import br.pedidos.domain.Pedido;
 import br.pedidos.repository.RepositorioPedido;
 
@@ -54,18 +56,30 @@ public class PedidoControllerTest extends ControllerTest {
 	public void testaGETParaPedidoEspecificoGaranteRetornoDoPedidoSolicitado() throws Exception {
 		inserePedido(3);
 		assertQuantidadeDePedidosE(3);
-
-		getPedido(2).andExpect(status().isOk()).andExpect(content().string(containsString("Teste Produto 1")));
+		
+		Optional<Pedido> buscaPedido = repositorio.buscaPorId(2l);
+		
+		getPedido(buscaPedido.get().getId())
+			.andExpect(status().isOk())
+			.andExpect(content().string(containsString(buscaPedido.get().getDescricao())));
 	}
 	
-//
-//	@Test
-//	public void testaPOSTNovoPedidoGaranteQueFoiCriado() throws JsonProcessingException, Exception {
-//		assertNenhumPedido();
-//		Pedido pedido = new Pedido("Criado via POST");
-//		postPedido(toJsonString(pedido));
-//		assertQuantidadeDePedidosE(1);
-//	}
+
+	@Test
+	public void testaPOSTNovoPedidoGaranteQueFoiCriado() throws JsonProcessingException, Exception {
+		assertNenhumPedido();
+		Pedido pedido = new Pedido("Criado via POST");
+		pedido.setItems(Arrays.asList(
+				 new Item("item1", 10l), 
+				 new Item("item2", 20l)	
+		));		
+		
+		String pedidoJson = toJsonString(pedido);
+		System.out.println(pedidoJson);
+		
+		postPedido(pedidoJson);
+		assertQuantidadeDePedidosE(1);
+	}
 //
 //	@Test
 //	public void testaDELETERepositorioVazioGaranteRespostaCorreta() throws Exception {

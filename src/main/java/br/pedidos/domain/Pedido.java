@@ -11,6 +11,9 @@ public class Pedido implements Identificacao{
 	private List<Item> items = new ArrayList();
 	private String descricao;
 	
+	public Pedido() {
+	}
+	
 	public Pedido(String descricao) {
 		this.descricao = descricao;
 	}
