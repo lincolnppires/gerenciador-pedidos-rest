@@ -57,6 +57,14 @@ public class PedidoController {
 		return new ResponseEntity<>(montador.paraRecurso(novoPedido), HttpStatus.CREATED);
 	}
 	
+	@RequestMapping(value="{id}", method=RequestMethod.DELETE)
+	public ResponseEntity<PedidoRecurso> deletePedido(@PathVariable Long id){
+		boolean foiDeletado = repositorio.delete(id);
+		HttpStatus responseStatus = foiDeletado ? HttpStatus.NO_CONTENT : HttpStatus.NOT_FOUND;
+		return new ResponseEntity<>(responseStatus);
+	}
+	
+	
 	
 	
 	

@@ -57,13 +57,12 @@ public class PedidoControllerTest extends ControllerTest {
 		inserePedido(3);
 		assertQuantidadeDePedidosE(3);
 		
-		Optional<Pedido> buscaPedido = repositorio.buscaPorId(2l);
+		Optional<Pedido> buscaPedido = repositorio.buscaTodos().stream().findFirst();
 		
 		getPedido(buscaPedido.get().getId())
 			.andExpect(status().isOk())
 			.andExpect(content().string(containsString(buscaPedido.get().getDescricao())));
 	}
-	
 
 	@Test
 	public void testaPOSTNovoPedidoGaranteQueFoiCriado() throws JsonProcessingException, Exception {
@@ -80,20 +79,21 @@ public class PedidoControllerTest extends ControllerTest {
 		postPedido(pedidoJson);
 		assertQuantidadeDePedidosE(1);
 	}
-//
-//	@Test
-//	public void testaDELETERepositorioVazioGaranteRespostaCorreta() throws Exception {
-//		assertNenhumPedido();
-//		deletePedido(1).andExpect(status().isNotFound());
-//	}
-//
-//	@Test
-//	public void testaDELETEPedidoExistenteGaranteQueFoiDeletado() throws Exception {
-//		inserePedido(1);
-//		assertQuantidadeDePedidosE(1);
-//		deletePedido(1);
-//		assertNenhumPedido();
-//	}
+
+	@Test
+	public void testaDELETERepositorioVazioGaranteRespostaCorreta() throws Exception {
+		assertNenhumPedido();
+		deletePedido(Long.MAX_VALUE).andExpect(status().isNotFound());
+	}
+
+	@Test
+	public void testaDELETEPedidoExistenteGaranteQueFoiDeletado() throws Exception {
+		Pedido pedido = new Pedido("descricao pedido");
+		Pedido deletaPedido = repositorio.insere(pedido);		
+		assertQuantidadeDePedidosE(1);
+		deletePedido(deletaPedido.getId());
+		assertNenhumPedido();
+	}
 //
 //	@Test
 //	public void testaPUTPedidoExistenteGaranteAtualizacao() throws Exception {
