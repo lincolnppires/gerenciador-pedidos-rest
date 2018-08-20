@@ -25,7 +25,7 @@ public class MontaRecursoPedido extends MontaRecurso<Pedido, PedidoRecurso> {
 		
 		recurso.add(selfLink.withSelfRel());
 		recurso.add(selfLink.withRel(UPDATE_REL));
-		recurso.add(selfLink.withRel(UPDATE_REL));
+		recurso.add(selfLink.withRel(DELETE_REL));
 		
 		return recurso;
 	
