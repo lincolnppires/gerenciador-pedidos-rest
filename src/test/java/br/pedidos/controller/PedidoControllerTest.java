@@ -25,46 +25,6 @@ import br.pedidos.repository.RepositorioPedido;
 @SpringBootTest
 public class PedidoControllerTest {
 
-	@Autowired
-	private RepositorioPedido repositorio;
-	
-	@Autowired
-	private EntityLinks entityLinks;
-	
-	@Before
-	public void setUp() {
-		repositorio.limpa();
-	}
-	
-	private ResultActions getPedido() {
-		return (ResultActions) get("/pedido");
-	}
-	
-	@Test
-	public void testaGetRepositorioVazio() throws Exception{
-		getPedido()
-			.andExpect(status().isOk())
-			.andExpect(content().string(equalTo("[]")));
-	}
-	
-	@Test
-	public void testaGetRepositorio2Pedido() throws Exception{
-		adiciona2Pedidos();
-		getPedido()
-			.andExpect(status().isOk())
-			.andExpect(content().string("pedido1"))
-			.andExpect(content().string("pedido2"));			
-	}
-	
-	private void adiciona2Pedidos() {
-		Pedido pedido1 = new Pedido("pedido1");
-		pedido1.setItems(Arrays.asList(new Item("item1", 10l), new Item("item2", 20l)));
-		Pedido pedido2 = new Pedido("pedido2");
-		pedido2.setItems(Arrays.asList(new Item("item1", 100l), new Item("item2", 200l)));
-		repositorio.insere(pedido1);
-		repositorio.insere(pedido2);
-	}
-	
 	
 	
 	
